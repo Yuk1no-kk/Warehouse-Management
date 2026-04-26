@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo.controller.HelloController"
+            prefWidth="1000" prefHeight="700">
+
+    <!-- Top: Search & Sort Bar -->
+    <top>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Label text="Warehouse Management System" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Separator orientation="VERTICAL"/>
+                <Label text="Search Items:"/>
+                <TextField fx:id="searchField" promptText="Search by name" prefWidth="200"/>
+                <Separator orientation="VERTICAL"/>
+                <Label text="Sort By:"/>
+                <ComboBox fx:id="sortFieldCombo" prefWidth="120">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Name"/>
+                            <String fx:value="Weight"/>
+                            <String fx:value="Item Type"/>
+                        </FXCollections>
+                    </items>
+                    <value>Name</value>
+                </ComboBox>
+                <Label text="Order:"/>
+                <ComboBox fx:id="sortOrderCombo" prefWidth="100">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Ascending"/>
+                            <String fx:value="Descending"/>
+                        </FXCollections>
+                    </items>
+                    <value>Ascending</value>
+                </ComboBox>
+            </HBox>
+            <!-- Capacity Progress Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Warehouse Capacity Usage:"/>
+                <ProgressBar fx:id="capacityProgressBar" prefWidth="400"/>
+                <Label fx:id="capacityText" text="0.00/100.00 kg"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Center: Item Table + Right Action Panel -->
+    <center>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="0" right="10" bottom="10" left="10"/>
+            </padding>
+            <!-- Left: Item Table -->
+            <TableView fx:id="itemTableView" HBox.hgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nameCol" text="Name" prefWidth="150"/>
+                    <TableColumn fx:id="typeCol" text="Type" prefWidth="100"/>
+                    <TableColumn fx:id="weightCol" text="Weight (kg)" prefWidth="100"/>
+                    <TableColumn fx:id="statusCol" text="Expiry/Durability" prefWidth="200"/>
+                    <TableColumn fx:id="specialCol" text="Special Attribute" prefWidth="180"/>
+                </columns>
+            </TableView>
+
+            <!-- Right: Action Panel -->
+            <VBox spacing="15" prefWidth="260">
+                <!-- Add New Item Form -->
+                <VBox spacing="10" style="-fx-border-color: #cccccc; -fx-border-radius: 5;">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <Label text="Add New Item" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                    <Label text="Item Type:"/>
+                    <ComboBox fx:id="itemTypeCombo" prefWidth="240">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Drink"/>
+                                <String fx:value="Food"/>
+                                <String fx:value="Gun"/>
+                                <String fx:value="Bomb"/>
+                            </FXCollections>
+                        </items>
+                        <promptText>Select Item Type</promptText>
+                    </ComboBox>
+                    <Label text="Item Name:"/>
+                    <TextField fx:id="nameField" promptText="Enter item name"/>
+                    <Label text="Weight (kg):"/>
+                    <TextField fx:id="weightField" promptText="Enter number, e.g. 0.5"/>
+                    <Label fx:id="specialLabel" text="Expiry Date (yyyy-MM-dd):"/>
+                    <TextField fx:id="specialField" promptText="For Drink/Food: date; For Gun: bullets"/>
+                    <Label text="Durability (0-100):"/>
+                    <TextField fx:id="durabilityField" promptText="Only for Gun/Bomb"/>
+                    <Button fx:id="addBtn" text="Add Item" prefWidth="240" onAction="#onAddItem"/>
+                </VBox>
+
+                <!-- Item Action Buttons -->
+                <VBox spacing="10" style="-fx-border-color: #cccccc; -fx-border-radius: 5;">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <Label text="Item Actions" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                    <Button fx:id="useBtn" text="Use/Consume Item" prefWidth="240" onAction="#onUseItem"/>
+                    <Button fx:id="removeBtn" text="Remove Item" prefWidth="240" onAction="#onRemoveItem"/>
+                </VBox>
+
+                <!-- Data Management Buttons -->
+                <VBox spacing="10" style="-fx-border-color: #cccccc; -fx-border-radius: 5;">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <Label text="Data Management" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                    <Button fx:id="saveBtn" text="Save Data to File" prefWidth="240" onAction="#onSaveData"/>
+                    <Button fx:id="loadBtn" text="Load Data from File" prefWidth="240" onAction="#onLoadData"/>
+                </VBox>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>
