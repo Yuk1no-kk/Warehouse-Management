@@ -35,7 +35,7 @@ public abstract class Consumable extends Item {
 
     @Override
     public String getDurabilityOrExpiry() {
-        return "过期时间：" + expiryDate.toString();
+        return "expired date：" + expiryDate.toString();
     }
 
     @Override

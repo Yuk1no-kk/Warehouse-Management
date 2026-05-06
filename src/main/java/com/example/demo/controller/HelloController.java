@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.*;
+import com.example.demo.service.DataInitializer;
 import com.example.demo.service.Warehouse;
 import com.example.demo.model.*;
 import com.example.demo.service.Warehouse;
@@ -55,6 +56,10 @@ public class HelloController {
         bindItemTypeChange();
 
         refreshCapacity();
+        DataInitializer.initializeWithSampleItems(warehouse);
+        // 初始化后刷新表格和容量
+        refreshCapacity();
+        itemTableView.refresh();
     }
 
 
